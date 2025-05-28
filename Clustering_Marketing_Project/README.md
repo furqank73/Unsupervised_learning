@@ -43,7 +43,7 @@ The Mall Customer dataset contains information about individual shoppers with th
    - Optimal cluster number determination using the elbow method
    - Cluster visualization
 
-## Why K-Means Was Chosen
+## Why [K-Means](.K-Means_Clustering) Was Chosen
 
 Several clustering algorithms were considered for this project, including DBSCAN and Hierarchical Clustering. However, **K-Means** was selected for the final implementation due to the following reasons:
 
