@@ -40,20 +40,57 @@ The Mall Customer dataset contains information about individual shoppers with th
 
 3. **Clustering**
    - K-Means clustering
-   - Optimal cluster number determination using the elbow method
+   - Gaussian Mixture Models
+   - Optimal cluster number determination using the elbow method and BIC/AIC
    - Cluster visualization
 
-## Why [K-Means](.K-Means_Clustering) Was Chosen
+## Clustering Algorithm Performance
 
-Several clustering algorithms were considered for this project, including DBSCAN and Hierarchical Clustering. However, **K-Means** was selected for the final implementation due to the following reasons:
+After evaluating multiple clustering approaches, we found the following results:
 
-- **Interpretability and Simplicity:** K-Means produces clear, spherical clusters that are easy to interpret, especially when visualizing in 2D using features like Annual Income and Spending Score.
-- **Scalability:** K-Means is highly scalable and computationally efficient, making it suitable for larger datasets and real-time applications.
-- **Well-defined Centroids:** Business stakeholders can easily understand the concept of cluster centroids, which represent customer segment "averages".
-- **DBSCAN Limitations:** DBSCAN is sensitive to parameter tuning (`eps`, `min_samples`) and struggled with identifying well-separated clusters due to uniform data density. It also classified many points as noise in this dataset.
-- **Hierarchical Clustering Challenges:** Hierarchical methods (like Agglomerative Clustering) are computationally more expensive and not scalable to larger datasets. Additionally, dendrogram interpretation becomes less useful with increasing sample size.
+### 1. **K-Means (Best Performing)**  
+- Achieved the highest silhouette score (**0.55**)  
+- Produced well-separated, interpretable clusters  
+- Optimal for marketing segmentation with clear centroids  
 
-For the goals of this marketing analysis—quick segmentation, visual interpretability, and ease of integration into a web app—**K-Means provided the most balanced solution**.
+### 2. **Gaussian Mixture Models (Second Best)**  
+- Achieved competitive silhouette score (**0.52**)  
+- Provided probabilistic cluster assignments  
+- Better at handling overlapping distributions than K-Means  
+
+### 3. DBSCAN  
+- Struggled with parameter tuning  
+- Classified many points as noise  
+
+## Why K-Means Was Chosen
+
+Several clustering algorithms were considered for this project. While **Gaussian Mixture Models** showed strong results as the second-best approach, **K-Means** was ultimately superior because:
+
+1. **Business Interpretability**  
+   - Hard cluster assignments are easier for marketing teams to implement  
+   - Clear centroid-based profiles for each customer segment  
+
+2. **Visual Clarity**  
+   - Spherical clusters are more intuitive to visualize in 2D/3D plots  
+
+3. **Computational Efficiency**  
+   - Faster to train and predict compared to GMM  
+
+4. **Stability**  
+   - Less sensitive to initialization than GMM  
+
+5. **Scalability**  
+   - Highly efficient for larger datasets and real-time applications  
+
+6. **Well-defined Centroids**  
+   - Business stakeholders easily understand cluster "averages"  
+
+GMM remains a powerful alternative when:
+- You need probability scores for cluster membership  
+- Your data has non-spherical cluster shapes  
+- You suspect overlapping customer segments  
+
+For the goals of this marketing analysis—quick segmentation, visual interpretability, and ease of integration into a web app—**K-Means provided the best combination of performance and business utility**, with GMM as a close second for more probabilistic analysis.
 
 ## Key Findings
 
@@ -79,7 +116,8 @@ A Streamlit web application has been created to make the customer segmentation a
 
 2. **Cluster Analysis**
    - Visualize customer segments
-   - Compare different clustering approaches
+   - Compare different clustering approaches (K-Means vs GMM)
+   - View probabilistic assignments for GMM
 
 3. **Customer Insights**
    - Profile analysis of each segment
@@ -91,3 +129,11 @@ A Streamlit web application has been created to make the customer segmentation a
 1. Install required packages:
    ```bash
    pip install streamlit pandas numpy matplotlib seaborn scikit-learn
+   ```
+
+2. Run the app:
+   ```bash
+   streamlit run mall_segmentation_app.py
+   ```
+
+The app provides interactive controls to adjust clustering parameters and visualize the results in real-time, making it a powerful tool for marketing analysts to explore customer segments.
