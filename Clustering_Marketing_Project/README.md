@@ -137,3 +137,4 @@ A Streamlit web application has been created to make the customer segmentation a
    ```
 
 The app provides interactive controls to adjust clustering parameters and visualize the results in real-time, making it a powerful tool for marketing analysts to explore customer segments.
+![app](streamlit_app/Capturestreaw.PNG)
