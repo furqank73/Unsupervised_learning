@@ -38,11 +38,11 @@ col_input, col_output, col_info = st.columns([1, 1.5, 1.5])
 
 # --- Input Column ---
 with col_input:
-    st.subheader("🧾 Customer Input")
+    st.subheader("Customer Input")
     income = st.slider("Annual Income (k$)", 0, 200, 40)
     spending = st.slider("Spending Score (1-100)", 0, 100, 50)
 
-    if st.button("🔍 Predict Segment", type="primary", use_container_width=True):
+    if st.button("Predict Segment", type="primary", use_container_width=True):
         sample = np.array([[income, spending]])
         sample_scaled = scaler.transform(sample)
         kmeans = load_model()
@@ -58,7 +58,7 @@ with col_input:
 with col_output:
     if "prediction" in st.session_state:
         pred = st.session_state.prediction
-        st.subheader("📊 Segmentation Result")
+        st.subheader("Segmentation Result")
 
         st.markdown(f"""
         <div style="background-color:{pred['info']['color']}20; padding:20px; border-radius:10px; border-left:6px solid {pred['info']['color']}; margin-bottom:20px;">
@@ -70,10 +70,10 @@ with col_output:
         </div>
         """, unsafe_allow_html=True)
 
-        st.subheader("📌 Recommended Strategy")
+        st.subheader("Recommended Strategy")
         st.info(f"**{pred['info']['Strategy']}**")
 
-        with st.expander("🔎 Segment Insights"):
+        with st.expander("Segment Insights"):
             st.write(f"""
             **{pred['info']['Profile']} Characteristics:**
             - {pred['info']['Income']} income level
@@ -88,7 +88,7 @@ with col_output:
 
 # --- Info Column: Cluster Definitions ---
 with col_info:
-    st.subheader("🧠 Segment Definitions")
+    st.subheader("Segment Definitions")
     for cluster_id, info in CLUSTER_INFO.items():
         st.markdown(f"""
         <div style="background-color:{info['color']}20; padding:12px; border-radius:8px; border-left:5px solid {info['color']}; margin-bottom:12px;">
@@ -101,4 +101,4 @@ with col_info:
 
 # --- Footer ---
 st.markdown("""---""")
-st.caption("📍 Customer Segmentation App • Built with Streamlit • v1.0")
+st.caption("Customer Segmentation App • Built with Streamlit • v1.0")
