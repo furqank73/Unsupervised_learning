@@ -6,7 +6,7 @@ from sklearn.preprocessing import StandardScaler
 # --- Load the model ---
 @st.cache_resource
 def load_model():
-    with open('models.pkl', 'rb') as f:
+    with open('model.pkl', 'rb') as f:
         model = pickle.load(f)
     return model
 
